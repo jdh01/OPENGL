@@ -21,7 +21,7 @@ int main(void)
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
 
-    //Glewinit requires the above context (look at documentation)
+    //Glewinit requires the above context (look at documentation).
     if (glewInit() != GLEW_OK)
     {
         std::cout << "Error" << std::endl;

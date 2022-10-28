@@ -28,17 +28,24 @@ int main(void)
     }
 
     std::cout << glGetString(GL_VERSION) << std::endl;
-
+    //cordinates of our traingle
     float positions[6] = {
-        -0.5f, -0.5f,
-         0.0f,  0.5f,
-         0.5f, -0.5f,
+        -0.5f, -0.5f, //x and y coordaintes
+         0.0f,  0.5f, //float is 4 bytes
+         0.5f, -0.5f, //3 Vertex
     };
 
     unsigned int buffer;
     glGenBuffers(1, &buffer);
-    glBindBuffer(GL_ARRAY_BUFFER, buffer); //this is like selecting a 'buffer' layer in photoshop
+    glBindBuffer(GL_ARRAY_BUFFER, buffer); //binding is like selecting a 'buffer' layer in photoshop
     glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), positions, GL_STATIC_DRAW); //sizeof is in bytes
+   
+    glEnableVertexAttribArray(0); //enabling for the next line to work
+    //now we describe the layout
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0); //(index, size, type, normalized, stride, pointer)
+    //index (only 1 attrib here) so 0, size 1-4 (2 because we have x and y), data type, normalized = do they need converting type or memory location? (no), 
+    //stride = offset to next vertex, pointer = offset between attributes in bytes)
+    
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))

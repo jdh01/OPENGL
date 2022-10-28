@@ -29,18 +29,26 @@ int main(void)
 
     std::cout << glGetString(GL_VERSION) << std::endl;
 
+    float positions[6] = {
+        -0.5f, -0.5f,
+         0.0f,  0.5f,
+         0.5f, -0.5f,
+    };
+
+    unsigned int buffer;
+    glGenBuffers(1, &buffer);
+    glBindBuffer(GL_ARRAY_BUFFER, buffer); //this is like selecting a 'buffer' layer in photoshop
+    glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), positions, GL_STATIC_DRAW); //sizeof is in bytes
+
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glBegin(GL_TRIANGLES);
+        glDrawArrays(GL_TRIANGLES, 0, 3); //use if you have no index buffer (mode, starting index, no. indicies to be rendered)
 
-        glVertex2f(-0.5, -0.5f); //projection matrix between -1 and 1
-        glVertex2f(0.0f, 0.5f);
-        glVertex2f(0.5, -0.5f);
-        glEnd();
+        //glDrawElements(GL_TRIANGLES, 3, null) is the other option for drawing
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);

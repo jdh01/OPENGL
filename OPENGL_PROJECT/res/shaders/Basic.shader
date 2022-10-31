@@ -13,7 +13,9 @@ void main()
 
 layout(location = 0) out vec4 color;
 
+uniform vec4 u_Color;
+
 void main()
 {
- color = vec4(1.0, 0.0, 0.0, 1.0); //(r, g, b, a) think of 0 - 1 as 0 - 255
+	color = u_Color;
 };

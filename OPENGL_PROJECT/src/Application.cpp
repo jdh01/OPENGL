@@ -6,6 +6,7 @@
 #include <sstream>
 #include "Renderer.h"
 #include "VertexBuffer.h"
+#include "VertexBufferLayout.h"
 #include "IndexBuffer.h"
 #include "VertexArray.h"
 #include "Shader.h"
@@ -74,7 +75,6 @@ int main(void)
 
         Shader shader("res/shaders/Basic.shader");
         shader.Bind();
-
         shader.SetUniform4f("u_Color", 0.8f, 0.3f, 0.8f, 1.0f);
 
         //Unbind everything for the VOA
@@ -83,6 +83,8 @@ int main(void)
         ib.Unbind();
         shader.Unbind();
 
+        Renderer renderer;
+
         float r = 0.0f;
         float increment = 0.05f;
 
@@ -90,7 +92,7 @@ int main(void)
         while (!glfwWindowShouldClose(window))
         {
             /* Render here */
-            GLCall(glClear(GL_COLOR_BUFFER_BIT));
+            renderer.Clear();
             //Rebind shader
             shader.Bind();
             //Setup uniforms
